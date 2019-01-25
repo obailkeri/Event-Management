@@ -10,7 +10,21 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
 
 require_once "config.php";
 
-$username = $password = "";
+$usererr=$passerr="";
+
+if($_SERVER["REQUEST_METHOD"]=="POST")
+{
+	if(empty($_POST["username"]))
+	{
+		$usererr="Username is required";
+	}
+	if(empty($_POST["password"]))
+	{
+			$passerr="Password Required";
+	}
+}
+
+
 
 ?>
 
@@ -31,10 +45,12 @@ $username = $password = "";
 				<div class="control-group1">
 				<input type="text" placeholder="Username" name="username">
 				</div>
+				<div class="error">*<?php echo $usererr; ?></div>
 
 				<div class="control-group2">
 				<input type="password" placeholder="Password" name="password">
 				</div>
+				<div class="error">*<?php echo $passerr; ?></div>
 
 				<button class="button">login</button>
 			</div>
@@ -42,4 +58,3 @@ $username = $password = "";
 </form>
 </body>
 </html>
-
