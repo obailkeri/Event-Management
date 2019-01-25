@@ -22,7 +22,7 @@ $username = $password = "";
   <link rel="stylesheet" href="login_style.css">
 </head>
   <body>
-<form method="post" action="page1.html">
+<form method="post" action="loginconfirmed.php">
 	<div class="login-screen">
 			<div class="app-title">
 				<h1>Login</h1>
