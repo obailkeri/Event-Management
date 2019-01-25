@@ -1,3 +1,20 @@
+<?php
+
+start_session();
+
+if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
+{
+	header("location: testlogin.php");
+	exit;
+}
+
+require_once "config.php";
+
+$username = $password = "";
+
+?>
+
+
 <html>
 	<title>Login Page</title>
 	<body>
@@ -12,4 +29,3 @@
 		</center>
 	</body>
 </html> 
-
