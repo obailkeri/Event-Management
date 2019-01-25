@@ -16,11 +16,11 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 {
 	if(empty($_POST["username"]))
 	{
-		$usererr="Username is required";
+		$usererr="Username Incorrect";
 	}
 	if(empty($_POST["password"]))
 	{
-			$passerr="Password Required";
+			$passerr="Password Incorrect";
 	}
 }
 
