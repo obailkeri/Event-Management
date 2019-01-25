@@ -10,12 +10,11 @@ if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
 
 require_once "config.php";
 
-<<<<<<< HEAD
+
 $username = $password = "";
 //variables for error testing
 //$username_err =$password_err = "";
 if($_SERVER["REQUEST_METHOD"] == "POST"){
-=======
 $usererr=$passerr="";
 
 if($_SERVER["REQUEST_METHOD"]=="POST")
@@ -29,9 +28,6 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 			$passerr="Password Incorrect";
 	}
 }
-
-
->>>>>>> 1a9e4a48f50628560f1e0a3ffc845f6ab94df35d
 
 	$username = trim($_POST["username"]);
 	$password = trim($_POST["password"]);
