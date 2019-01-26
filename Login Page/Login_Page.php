@@ -1,36 +1,35 @@
 <?php
 
-start_session();
+session_start();
 
 if(isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true)
 {
-	header("location: testlogin.php");
+	header("location: localhost/loginconfirmed.php");
+	//echo "loggedin";
 	exit;
 }
 
 require_once "config.php";
-
-
 $username = $password = "";
 //variables for error testing
-//$username_err =$password_err = "";
-if($_SERVER["REQUEST_METHOD"] == "POST"){
 $usererr=$passerr="";
-
-if($_SERVER["REQUEST_METHOD"]=="POST")
+if($_SERVER["REQUEST_METHOD"] == "POST")
 {
-	if(empty($_POST["username"]))
+	if($_SERVER["REQUEST_METHOD"]=="POST")
 	{
-		$usererr="Username Incorrect";
+		if(empty($_POST["username"]))
+		{
+			$usererr="Username Incorrect";
+		}
+		if(empty($_POST["password"]))
+		{
+				$passerr="Password Incorrect";
+		}
 	}
-	if(empty($_POST["password"]))
-	{
-			$passerr="Password Incorrect";
-	}
-}
-
 	$username = trim($_POST["username"]);
 	$password = trim($_POST["password"]);
+	//echo $username;
+	//echo $password;
 
 	$sql ="SELECT id,user_name ,password FROM login WHERE user_name = ?";
 	if($stmt = mysqli_prepare($mysqllink,$sql)){
@@ -56,15 +55,15 @@ if($_SERVER["REQUEST_METHOD"]=="POST")
 						$_SESSION["id"] = $id;
 
 						$_SESSION["username"] = $username;
-
-						header("location: loginconfirmed.php"); 
+						echo "loggedin";
+						header("location: localhost/loginconfirmed.php"); 
 					}
 				}
 			}
 		}
 		mysqli_stmt_close($stmt);
 	}
-	mysqli_close($link);
+	mysqli_close($mysqllink);
 }
 ?>
 
