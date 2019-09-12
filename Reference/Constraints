@@ -1,0 +1,8 @@
+Constraints 
+
+Room 
+Value of projector_support can be 0 or 1 only
+
+
+event_ledger
+check end date is always after start date (do this server side)
