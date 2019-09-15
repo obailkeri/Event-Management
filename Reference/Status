@@ -1,0 +1,22 @@
+Types of status
+
+status level (1,2,3,4,5,6)
+
+
+1)Pending for Event approval 
+	Req goes to the highest authority for approval for event conduction
+	Status level 1
+	If this a approved all slot records are added to 
+
+2) Rejected Event 
+
+3)Pending for resource approval 
+	
+	Req goes to second level heads for 
+
+4)Rejected resource request
+
+5)Approved
+	Security can give acknowledgements for keys
+
+6)Completed
