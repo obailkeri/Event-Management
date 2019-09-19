@@ -55,6 +55,8 @@ CREATE TABLE `event_ledger` (
   `username` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_level` int(11) NOT NULL CHECK (`status_level` in (1,2,3,4,5,6)),
   `prev_status_level` int(11) DEFAULT NULL CHECK (`prev_status_level` in (1,2,3,4,5,6)),
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
   PRIMARY KEY (`event_id`),
   KEY `username` (`username`),
   CONSTRAINT `event_ledger_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
@@ -275,4 +277,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-19 19:36:53
+-- Dump completed on 2019-09-19 19:52:52
