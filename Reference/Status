@@ -6,9 +6,10 @@ status level (1,2,3,4,5,6)
 1)Pending for Event approval 
 	Req goes to the highest authority for approval for event conduction
 	Status level 1
-	If this a approved all slot records are added to 
+	If this a approved all slot records are added to slots_and_details
 
 2) Rejected Event 
+	goes to the event_rejected table for further comunication
 
 3)Pending for resource approval 
 	

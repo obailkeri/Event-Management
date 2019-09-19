@@ -27,7 +27,8 @@ CREATE TABLE `emp` (
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `contact` int(11) NOT NULL,
   `id_no` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`emp_id`)
+  PRIMARY KEY (`emp_id`),
+  UNIQUE KEY `id_no` (`id_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -50,8 +51,10 @@ DROP TABLE IF EXISTS `event_ledger`;
 CREATE TABLE `event_ledger` (
   `event_id` int(11) NOT NULL AUTO_INCREMENT,
   `event_name` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `status_level` int(11) NOT NULL CHECK (`status_level` in (1,2,3,4,5,6)),
+  `prev_status_level` int(11) DEFAULT NULL CHECK (`prev_status_level` in (1,2,3,4,5,6)),
   PRIMARY KEY (`event_id`),
   KEY `username` (`username`),
   CONSTRAINT `event_ledger_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
@@ -77,6 +80,8 @@ DROP TABLE IF EXISTS `event_rejected`;
 CREATE TABLE `event_rejected` (
   `event_id` int(11) NOT NULL,
   `reason_for_rejection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `communication_number` int(11) NOT NULL,
+  `communication_flag` int(11) DEFAULT NULL CHECK (`communication_flag` in (0,1,2)),
   KEY `fk4` (`event_id`),
   CONSTRAINT `fk4` FOREIGN KEY (`event_id`) REFERENCES `event_ledger` (`event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -122,10 +127,12 @@ DROP TABLE IF EXISTS `resource_rejected`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `resource_rejected` (
-  `event_id` int(11) NOT NULL,
-  `slot_number` int(11) NOT NULL,
-  `room_id` int(11) NOT NULL,
-  `reason_for_rejection` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` int(11) DEFAULT NULL,
+  `reason_for_rejection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `communication_no` int(11) NOT NULL,
+  `communication_flag` int(11) DEFAULT NULL CHECK (`communication_flag` in (0,1,2)),
+  KEY `fk8` (`id`),
+  CONSTRAINT `fk8` FOREIGN KEY (`id`) REFERENCES `slots_and_details` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -151,8 +158,11 @@ CREATE TABLE `room` (
   `floor` int(11) NOT NULL,
   `building` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
   `emp_incharge_id` int(11) NOT NULL,
+  `room_name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `num_computers` int(11) NOT NULL,
+  `projector_support` int(11) NOT NULL CHECK (`projector_support` in (0,1)),
+  `capacity` int(11) NOT NULL,
   PRIMARY KEY (`room_id`),
-  UNIQUE KEY `room_number` (`room_number`),
   UNIQUE KEY `unique_rooms` (`room_number`,`floor`,`building`),
   KEY `fk3` (`emp_incharge_id`),
   CONSTRAINT `fk3` FOREIGN KEY (`emp_incharge_id`) REFERENCES `emp` (`emp_id`)
@@ -176,16 +186,19 @@ DROP TABLE IF EXISTS `slots_and_details`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `slots_and_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `event_id` int(11) NOT NULL,
   `slot_number` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `status_level` int(11) NOT NULL CHECK (`status_level` in (1,2,3,4,5,6)),
-  PRIMARY KEY (`event_id`,`room_id`,`slot_number`),
-  KEY `fk2` (`room_id`),
-  CONSTRAINT `fk1` FOREIGN KEY (`event_id`) REFERENCES `event_ledger` (`event_id`),
-  CONSTRAINT `fk2` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`)
+  `prev_status_level` int(11) NOT NULL CHECK (`prev_status_level` in (1,2,3,4,5,6)),
+  `purpose` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `purpose_explained` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `fk1` (`room_id`),
+  CONSTRAINT `fk1` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -210,7 +223,8 @@ CREATE TABLE `student` (
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `contact_no` int(11) NOT NULL,
   `id_no` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`student_id`)
+  PRIMARY KEY (`student_id`),
+  UNIQUE KEY `id_no` (`id_no`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -237,7 +251,9 @@ CREATE TABLE `users` (
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `org_id` int(11) DEFAULT NULL,
   `email_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL CHECK (`email_id` like '%@%.com'),
-  PRIMARY KEY (`username`)
+  PRIMARY KEY (`username`),
+  KEY `org_id` (`org_id`),
+  CONSTRAINT `users_ibfk_1` FOREIGN KEY (`org_id`) REFERENCES `organization` (`org_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -259,4 +275,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-15 16:13:15
+-- Dump completed on 2019-09-19 19:36:53
