@@ -42,6 +42,32 @@ LOCK TABLES `emp` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `event_communication`
+--
+
+DROP TABLE IF EXISTS `event_communication`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `event_communication` (
+  `event_id` int(11) NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `communication_number` int(11) NOT NULL,
+  `communication_flag` int(11) DEFAULT NULL CHECK (`communication_flag` in (0,1,2)),
+  KEY `fk4` (`event_id`),
+  CONSTRAINT `fk4` FOREIGN KEY (`event_id`) REFERENCES `event_ledger` (`event_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `event_communication`
+--
+
+LOCK TABLES `event_communication` WRITE;
+/*!40000 ALTER TABLE `event_communication` DISABLE KEYS */;
+/*!40000 ALTER TABLE `event_communication` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `event_ledger`
 --
 
@@ -71,32 +97,6 @@ LOCK TABLES `event_ledger` WRITE;
 /*!40000 ALTER TABLE `event_ledger` DISABLE KEYS */;
 INSERT INTO `event_ledger` VALUES (1,'A1','sdfvs','aj10',1,1,'2018-08-10','2018-08-11'),(2,'A2','sdfvs','aj10',1,1,'2017-08-10','2017-08-11'),(3,'A3','sdfvs','aj10',1,1,'2016-08-10','2016-08-11'),(4,'A4','sdfvs','aj10',1,1,'2015-08-10','2015-08-11'),(5,'A5','sdfvs','aj10',1,1,'2014-08-10','2014-08-11'),(6,'P1','sad','ap',1,1,'2013-08-11','2013-08-12'),(7,'T1','sadsa','test',1,1,'2020-08-10','2020-08-11');
 /*!40000 ALTER TABLE `event_ledger` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `event_rejected`
---
-
-DROP TABLE IF EXISTS `event_rejected`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `event_rejected` (
-  `event_id` int(11) NOT NULL,
-  `reason_for_rejection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `communication_number` int(11) NOT NULL,
-  `communication_flag` int(11) DEFAULT NULL CHECK (`communication_flag` in (0,1,2)),
-  KEY `fk4` (`event_id`),
-  CONSTRAINT `fk4` FOREIGN KEY (`event_id`) REFERENCES `event_ledger` (`event_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `event_rejected`
---
-
-LOCK TABLES `event_rejected` WRITE;
-/*!40000 ALTER TABLE `event_rejected` DISABLE KEYS */;
-/*!40000 ALTER TABLE `event_rejected` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -151,15 +151,15 @@ INSERT INTO `organization` VALUES ('CSI',1);
 UNLOCK TABLES;
 
 --
--- Table structure for table `resource_rejected`
+-- Table structure for table `resource_communication`
 --
 
-DROP TABLE IF EXISTS `resource_rejected`;
+DROP TABLE IF EXISTS `resource_communication`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `resource_rejected` (
+CREATE TABLE `resource_communication` (
   `id` int(11) DEFAULT NULL,
-  `reason_for_rejection` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `communication_no` int(11) NOT NULL,
   `communication_flag` int(11) DEFAULT NULL CHECK (`communication_flag` in (0,1,2)),
   KEY `fk8` (`id`),
@@ -168,12 +168,12 @@ CREATE TABLE `resource_rejected` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `resource_rejected`
+-- Dumping data for table `resource_communication`
 --
 
-LOCK TABLES `resource_rejected` WRITE;
-/*!40000 ALTER TABLE `resource_rejected` DISABLE KEYS */;
-/*!40000 ALTER TABLE `resource_rejected` ENABLE KEYS */;
+LOCK TABLES `resource_communication` WRITE;
+/*!40000 ALTER TABLE `resource_communication` DISABLE KEYS */;
+/*!40000 ALTER TABLE `resource_communication` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -332,4 +332,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-01 18:06:03
+-- Dump completed on 2019-10-01 18:16:27
