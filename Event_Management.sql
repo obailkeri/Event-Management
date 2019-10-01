@@ -60,7 +60,7 @@ CREATE TABLE `event_ledger` (
   PRIMARY KEY (`event_id`),
   KEY `username` (`username`),
   CONSTRAINT `event_ledger_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `event_ledger` (
 
 LOCK TABLES `event_ledger` WRITE;
 /*!40000 ALTER TABLE `event_ledger` DISABLE KEYS */;
-INSERT INTO `event_ledger` VALUES (1,'A1','sdfvs','aj10',1,1,'2018-08-10','2018-08-11'),(2,'A2','sdfvs','aj10',1,1,'2017-08-10','2017-08-11'),(3,'A3','sdfvs','aj10',1,1,'2016-08-10','2016-08-11'),(4,'A4','sdfvs','aj10',1,1,'2015-08-10','2015-08-11'),(5,'A5','sdfvs','aj10',1,1,'2014-08-10','2014-08-11'),(6,'P1','sad','ap',1,1,'2013-08-11','2013-08-12');
+INSERT INTO `event_ledger` VALUES (1,'A1','sdfvs','aj10',1,1,'2018-08-10','2018-08-11'),(2,'A2','sdfvs','aj10',1,1,'2017-08-10','2017-08-11'),(3,'A3','sdfvs','aj10',1,1,'2016-08-10','2016-08-11'),(4,'A4','sdfvs','aj10',1,1,'2015-08-10','2015-08-11'),(5,'A5','sdfvs','aj10',1,1,'2014-08-10','2014-08-11'),(6,'P1','sad','ap',1,1,'2013-08-11','2013-08-12'),(7,'T1','sadsa','test',1,1,'2020-08-10','2020-08-11');
 /*!40000 ALTER TABLE `event_ledger` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,6 +174,31 @@ CREATE TABLE `resource_rejected` (
 LOCK TABLES `resource_rejected` WRITE;
 /*!40000 ALTER TABLE `resource_rejected` DISABLE KEYS */;
 /*!40000 ALTER TABLE `resource_rejected` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `returnqs`
+--
+
+DROP TABLE IF EXISTS `returnqs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `returnqs` (
+  `position` int(11) DEFAULT NULL,
+  `e_name` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `start_date` date DEFAULT NULL,
+  `end_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `returnqs`
+--
+
+LOCK TABLES `returnqs` WRITE;
+/*!40000 ALTER TABLE `returnqs` DISABLE KEYS */;
+INSERT INTO `returnqs` VALUES (1,'A1','2018-08-10','2018-08-11'),(2,'A2','2017-08-10','2017-08-11'),(3,'A3','2016-08-10','2016-08-11'),(4,'A4','2015-08-10','2015-08-11'),(5,'A5','2014-08-10','2014-08-11'),(7,'T1','2020-08-10','2020-08-11');
+/*!40000 ALTER TABLE `returnqs` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -294,7 +319,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('aj10','aj10',1,'Atharva',1,'ayhu@.com'),('ap','ap',1,'Ayushi',1,'122@.com');
+INSERT INTO `users` VALUES ('aj10','aj10',1,'Atharva',1,'ayhu@.com'),('ap','ap',1,'Ayushi',1,'122@.com'),('test','test123',1,'test',1,'as@.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -307,4 +332,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-09-26 19:55:01
+-- Dump completed on 2019-10-01 18:06:03
