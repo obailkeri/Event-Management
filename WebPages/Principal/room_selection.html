@@ -21,6 +21,71 @@
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/logo.png">
+
+<style type="text/css">
+  
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.seat {
+  float: left;
+  display: block;
+  margin: 5px;
+  background: #E3F2FD;
+  border: 2px #263238 solid;
+  width: 60px;
+  height: 60px;
+}
+
+.seat1 {
+  float: left;
+  display: block;
+  margin: 5px;
+  background: #E3F2FD;
+  border: 2px #263238 solid;
+  width: 60px;
+  height: 135px;
+}
+
+.seat2 {
+  float: left;
+  display: block;
+  margin: 5px;
+  background: #E3F2FD;
+  border: 2px #263238 solid;
+  width: 135px;
+  height: 360px;
+}
+
+input:disabled {
+  display: block;
+  margin: 5px;
+  background: #BDBDBD;
+  border: 2px #9E9E9E solid;
+  width: 100px;
+  height: 110px;
+}
+
+.seat-select {
+  display: none;
+}
+
+.seat-select:checked+.seat {
+  background: #536DFE;
+}
+
+.seat-select:checked+.seat1 {
+  background: #536DFE;
+}
+
+.seat-select:checked+.seat2 {
+  background: #536DFE;
+}
+
+</style>
+    
   </head>
   <body>
 
@@ -105,88 +170,98 @@
           <section class="py-5">
             <div class="row">
               <div class="col-lg-12 mb-4">
-
-                  <div class="card">
-                    <div class="card-header">
-                      <h3 class="h6 text-uppercase mb-0">Event Name</h3>
-                    </div>
-
-                    <div class="card-body">
-
-                      <h5><span>Approved/Rejected</span> By</h5>
-                      <br>
-                      <p>Head Organiser</p>
-                      <p>Event Description</p>
-                      <p>Start Date</p>
-                      <p>End Date</p>
-                      <br>
-
-                      <a href="room_selection.html"><button class="btn-sm btn-primary">Proceed</button></a>
-
-                    </div>
+                <div class="card">
+                  <div class="card-header">
+                    <h6 class="text-uppercase mb-0">My Events</h6>
                   </div>
-
-                  <section class="py-2"></section>
-
-                  <div class="card">
-                    <div class="card-header">
-                      <h3 class="h6 text-uppercase mb-0">Messaging</h3>
-                    </div>
-
-                    <div class="card-body">
-                      <form action="#">
-                        <br>
-                        <div class="form-group">
-                          <label>Message</label>
-                          <textarea type="textarea" class="form-control" style="height: 80px;"></textarea>
+                  <div class="card-body">
+                    <form id="room_book" method="" action="">
+                      <div class="form-group row justify-content-center">
+                        <label class="col-md-2 form-control-label"><p class="pt-1" style="font-size: 20px;">Select Floor :</p></label>
+                        <div class="col-md-3 select mb-3 pl-0">
+                          <select name="account" class="form-control">
+                            <option>Ground</option>
+                            <option>First</option>
+                            <option>Second</option>
+                            <option>Third</option>
+                            <option>Fourth</option>
+                          </select>
                         </div>
-
-                        <div class="form-group">
-                          <div class="row justify-content-right">
-                            <div class="col-10"></div>
-                            <div class="col-2">
-                              <input type="submit" value="Send" class="btn btn-primary">
-                            </div>
-                          </div>
+                      </div>
+                      <div class="row justify-content-center pb-5">
+                        <div class="col-md-4">
+                          <section id="seats">
+                            <table>
+                              <!-- Row 1 -->
+                              <tr>
+                                <td>
+                                  <input id="seat-1" class="seat-select" type="checkbox" value="1" name="seat[]">
+                                  <label for="seat-1" class="seat" data-toggle="popover" data-content="001"></label>
+                                </td>
+                                <td>
+                                  <input id="seat-2" class="seat-select" type="checkbox" value="2" name="seat[]">
+                                  <label for="seat-2" class="seat" data-toggle="popover" data-content="002"></label>
+                                </td>
+                                <td colspan="2" rowspan="5">
+                                  <input id="seat-3" class="seat-select" type="checkbox" value="3" name="seat[]">
+                                  <label for="seat-3" class="seat2" data-toggle="popover" data-content="BasketBall Ground"></label>
+                                </td>
+                              </tr>
+                              <!-- Row 2 -->
+                              <tr>
+                                <td>
+                                  <input id="seat-4" class="seat-select" type="checkbox" value="4" name="seat[]">
+                                  <label for="seat-4" class="seat" data-toggle="popover" data-content="003"></label>
+                                </td>
+                                <td rowspan="2">
+                                  <input id="seat-5" class="seat-select" type="checkbox" value="5" name="seat[]">
+                                  <label for="seat-5" class="seat1" data-toggle="popover" data-content="Seminar Hall 1"></label>
+                                </td>
+                              </tr>
+                              <!-- Row 3 -->
+                              <tr>
+                                <td>
+                                  <input id="seat-6" class="seat-select" type="checkbox" value="6" name="seat[]">
+                                  <label for="seat-6" class="seat" data-toggle="popover" data-content="004"></label>
+                                </td>
+                              </tr>
+                              <!-- Row 4 -->
+                              <tr>
+                                <td>
+                                  <input id="seat-7" class="seat-select" type="checkbox" value="7" name="seat[]">
+                                  <label for="seat-7" class="seat" data-toggle="popover" data-content="005"></label>
+                                </td>
+                                <td rowspan="2">
+                                  <input id="seat-8" class="seat-select" type="checkbox" value="8" name="seat[]">
+                                  <label for="seat-8" class="seat1" data-toggle="popover" data-content="Seminar Hall 2"></label>
+                                </td>
+                              </tr>
+                              <!-- Row 5 -->
+                              <tr>
+                                <td>
+                                  <input id="seat-9" class="seat-select" type="checkbox" value="9" name="seat[]">
+                                  <label for="seat-9" class="seat" data-toggle="popover" data-content="006"></label>
+                                </td>
+                              </tr>
+                            </table>
+                          </section>
                         </div>
-                      </form>
+                      </div>
 
-                      <section>
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="card mb-lg-0">         
-                              <div class="card-header">
-                                <h2 class="h6 mb-0 text-uppercase">Sender</h2>
-                              </div>
-                              <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                            </div>
-                          </div>
+                      <div class="row justify-content-center">
+                        <div class="col-md-3">
+                          <button type="reset" class="btn btn-secondary mr-2">Clear</button>
+                          <button type="submit" class="btn-sm btn-primary">Submit</button>
                         </div>
-                      </section>
+                      </div>
+                    </form>
 
-                      <section class="py-2"></section>
-
-                      <section>
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="card mb-lg-0">         
-                              <div class="card-header">
-                                <h2 class="h6 mb-0 text-uppercase">Sender</h2>
-                              </div>
-                              <div class="card-body">Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                            </div>
-                          </div>
-                        </div>
-                      </section>
-
-                    </div>
                   </div>
-                
+                </div>
               </div>
             </div>
           </section>
+
         </div>
 
         <!-----Footer--------------------------------------------------------------------------------------------->
@@ -215,5 +290,16 @@
     <script src="vendor/chart.js/Chart.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
     <script src="js/front.js"></script>
+
+    <script type="text/javascript">
+      
+      $(document).ready(function(){
+        $('[data-toggle="popover"]').popover({
+            placement : 'top',
+            trigger : 'hover'
+        });
+      });
+
+    </script>
   </body>
 </html>

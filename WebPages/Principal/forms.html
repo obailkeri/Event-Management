@@ -113,7 +113,7 @@
 
                   <div class="card-body">
                   	<h5 id="req"></h5>
-                    <form class="form-horizontal" onsubmit="validate(0)">
+                    <form class="form-horizontal" onsubmit="validate(0)" action="#room_selection.html">
                       <div class="form-group row">
                         <label class="col-md-3 form-control-label">Event Name</label>
                         <div class="col-md-7">
@@ -314,6 +314,10 @@
             if (flag) {
                 // document.getElementById("req").innerHTML = "Please Fill all the Details..!!";
                 document.getElementById("req").style.color = "red";
+                return false;
+            }
+            else {
+                return true;
             }
 
             event.preventDefault();
