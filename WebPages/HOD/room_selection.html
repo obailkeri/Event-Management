@@ -98,7 +98,7 @@ input:disabled {
         <a href="index.html"><img src="img/logo.png" style="width:50px; height:40px;"></a>
 
         <!-- For Side Bar Toggle -->
-        <a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left ml-2"></i></a>
+        <!-- <a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a> -->
 
         <a href="index.html" class="navbar-brand font-weight-bold text-uppercase text-base">Event Manager</a>
         <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
@@ -151,14 +151,14 @@ input:disabled {
               <!-- <li class="sidebar-list-item"><a href="tables.html" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>Tables</span></a></li> -->
               <li class="sidebar-list-item"><a href="forms.html" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>New Event</span></a></li>
 
-          <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages1" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Event Proposals</span></a>
+          <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages1" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Classroom Proposals</span></a>
             <div id="pages1" class="collapse">
               <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
-                <li class="sidebar-list-item"><a href="eventProp_new.html" class="sidebar-link text-muted pl-lg-5">New Proposals</a></li>
-                <li class="sidebar-list-item"><a href="eventProp_past.html" class="sidebar-link text-muted pl-lg-5">Past Proposals</a></li>
+                <li class="sidebar-list-item"><a href="room_prop_new.html" class="sidebar-link text-muted pl-lg-5">New Proposals</a></li>
+                <li class="sidebar-list-item"><a href="room_prop_past.html" class="sidebar-link text-muted pl-lg-5">Past Proposals</a></li>
             </div>
           </li>
-              
+
           <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted active"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Events</span></a>
             <div id="pages" class="collapse">
               <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
@@ -185,6 +185,7 @@ input:disabled {
                   </div>
                   <div class="card-body">
                     <form id="room_book" method="" action="">
+                      <!-- Floor Selection -->
                       <!-- <div class="form-group row justify-content-center">
                         <label class="col-md-2 form-control-label"><p class="pt-1" style="font-size: 20px;">Select Floor :</p></label>
                         <div class="col-md-3 select mb-3 pl-0">
@@ -320,8 +321,8 @@ input:disabled {
 
                   </div>
                 </div>
-              </div>
-            </div>
+
+                <section class="py-2"></section>
           </section>
 
         </div>
@@ -374,6 +375,5 @@ input:disabled {
       });
 
     </script>
-
   </body>
 </html>
