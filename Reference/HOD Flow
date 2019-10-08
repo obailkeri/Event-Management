@@ -1,0 +1,30 @@
+Tables Required
+slots_and_details,resource_communication,event_ledger
+
+
+
+Start Point - Principal Approves the event
+
+1) Student selects each room he requires for the event. Each room requires its time slot to be booked. There are 3 available time slots(9am-1pm,1pm-6pm,9am-6pm).Each Room reqires a title and a purpose.This selection is done using the BMS style UI
+
+2) Once a student has selected these content,a request goes to the HOD containing all this information.
+	The table slots_and_details is filled for each room its status level is set to 1 
+
+
+3) The HOD will recive this request which can be viewed
+
+4) This request will be a BMS type ui.The selected rooms will appear yellow and the rest will have no color.
+
+5) On clicking over each yellow room,The Details filled by the user can be seen on it on a modal. This modal also has an accept or reject button
+	The hod must either accept or reject all rooms in order to respond to the application
+
+	If a message needs to be sent the resource_communication table must be used similar to principal communication
+
+
+6) If a room is accepted,its status level is 2 (in slots and details)
+	If a room is rejected its status level is 3(in slots and details)
+
+7) If all rooms are accepted then the status level (in event_ledger table) will change to 5
+
+8) If any one room is rejected then the status level(in event_ledger table) will change to 4
+	In this case the User must go back to STEP 1 and follow the same procedure again till all rooms are accepted
