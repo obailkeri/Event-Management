@@ -21,6 +21,71 @@
     <link rel="stylesheet" href="css/custom.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/logo.png">
+
+<style type="text/css">
+  
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.seat {
+  float: left;
+  display: block;
+  margin: 5px;
+  background: #E3F2FD;
+  border: 2px #263238 solid;
+  width: 60px;
+  height: 60px;
+}
+
+.seat1 {
+  float: left;
+  display: block;
+  margin: 5px;
+  background: #E3F2FD;
+  border: 2px #263238 solid;
+  width: 60px;
+  height: 135px;
+}
+
+.seat2 {
+  float: left;
+  display: block;
+  margin: 5px;
+  background: #E3F2FD;
+  border: 2px #263238 solid;
+  width: 135px;
+  height: 360px;
+}
+
+input:disabled {
+  display: block;
+  margin: 5px;
+  background: #BDBDBD;
+  border: 2px #9E9E9E solid;
+  width: 100px;
+  height: 110px;
+}
+
+.seat-select {
+  display: none;
+}
+
+.seat-select:checked+.seat {
+  background: #536DFE;
+}
+
+.seat-select:checked+.seat1 {
+  background: #536DFE;
+}
+
+.seat-select:checked+.seat2 {
+  background: #536DFE;
+}
+
+</style>
+    
   </head>
   <body>
 
@@ -35,7 +100,7 @@
         <!-- For Side Bar Toggle -->
         <a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left ml-2"></i></a>
 
-        <a href="index.html" class="navbar-brand font-weight-bold text-uppercase text-base">Event Manager</a>
+        <a href="index.html" class="navbar-brand font-weight-bold text-uppercase text-base mx-auto">Event Manager</a>
         <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
           <li class="nav-item dropdown mr-3"><a id="notifications" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-gray-400 px-1"><i class="fa fa-bell"></i><span class="notification-icon"></span></a>
             <div aria-labelledby="notifications" class="dropdown-menu"><a href="#" class="dropdown-item">
@@ -80,19 +145,19 @@
 
       <!-----Side-Bar--------------------------------------------------------------------------------------------->
 
-      <div id="sidebar" class="sidebar py-3">
+            <div id="sidebar" class="sidebar py-3">
         <ul class="sidebar-menu list-unstyled">
               <li class="sidebar-list-item"><a href="index.html" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
               <!-- <li class="sidebar-list-item"><a href="tables.html" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>Tables</span></a></li> -->
-              <li class="sidebar-list-item"><a href="forms.html" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>New Event</span></a></li>
-
-          <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages1" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted active"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Classroom Proposals</span></a>
+              <li class="sidebar-list-item"><a href="forms.html" class="sidebar-link text-muted active"><i class="o-survey-1 mr-3 text-gray"></i><span>New Event</span></a></li>
+              
+            <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages1" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Event Proposals</span></a>
             <div id="pages1" class="collapse">
               <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
-                <li class="sidebar-list-item"><a href="room_prop_new.html" class="sidebar-link text-muted pl-lg-5">New Proposals</a></li>
-                <li class="sidebar-list-item"><a href="room_prop_past.html" class="sidebar-link text-muted pl-lg-5">Past Proposals</a></li>
+                <li class="sidebar-list-item"><a href="eventProp_new.html" class="sidebar-link text-muted pl-lg-5">New Proposals</a></li>
+                <li class="sidebar-list-item"><a href="eventProp_past.html" class="sidebar-link text-muted pl-lg-5">Past Proposals</a></li>
             </div>
-          </li>>
+          </li>
 
           <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Events</span></a>
             <div id="pages" class="collapse">
@@ -111,52 +176,84 @@
       <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
 
-          <section class="py-4">
-          </section>
-
-          <section>
+          <section class="py-5">
             <div class="row">
               <div class="col-lg-12 mb-4">
                 <div class="card">
                   <div class="card-header">
-                    <h6 class="text-uppercase mb-0">New Classroom Proposals</h6>
+                    <h6 class="text-uppercase mb-0">My Events</h6>
                   </div>
-                  <div class="card-body">                           
-                    <table class="table table-striped card-text">
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Event Name</th>
-                          <th>Sender</th>
-                          <th>Details</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <th scope="row">1</th>
-                          <td>Event2</td>
-                          <td>Otto</td>
-                          <td><a href="room_selection_prop.html"><button class="btn-sm btn-primary">View</button></a></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">2</th>
-                          <td>Event5</td>
-                          <td>Thornton</td>
-                          <td><a href="room_selection_prop.html"><button class="btn-sm btn-primary">View</button></a></td>
-                        </tr>
-                        <tr>
-                          <th scope="row">3</th>
-                          <td>Event6</td>
-                          <td>the Bird</td>
-                          <td><a href="room_selection_prop.html"><button class="btn-sm btn-primary">View</button></a></td>
-                        </tr>
-                      </tbody>
-                    </table>
+                  <div class="card-body">
+                    <form id="room_book" method="" action="">
+                      <!-- Floor Selection -->
+                      <!-- <div class="form-group row justify-content-center">
+                        <label class="col-md-2 form-control-label"><p class="pt-1" style="font-size: 20px;">Select Floor :</p></label>
+                        <div class="col-md-3 select mb-3 pl-0">
+                          <select name="account" class="form-control">
+                            <option>Ground</option>
+                            <option>First</option>
+                            <option>Second</option>
+                            <option>Third</option>
+                            <option>Fourth</option>
+                          </select>
+                        </div>
+                      </div> -->
+
+                      <div class="form-group row justify-content-center">
+                        <label class="col-md-12 form-control-label text-center"><p class="pt-1" style="font-size: 20px;">Provide details for all selected rooms</p></label>
+                      </div>
+
+                      <div class="row justify-content-center pb-1">
+                        <div class="col-lg-12 mb-4">
+                          <div class="card">
+                            <div class="card-header">
+                              <h6 class="text-uppercase mb-0">Room Id : </h6>
+                            </div>
+                            <div class="card-body">
+                              <form class="form-horizontal">
+                                <div class="form-group row">
+                                  <label class="col-sm-3 form-control-label">Title :</label>
+                                  <div class="col-md-6">
+                                    <input id="title" type="text" placeholder="" class="form-control">
+                                  </div>
+                                </div>
+                                <div class="form-group row">
+                                  <label class="col-sm-3 form-control-label">Description :</label>
+                                  <div class="col-md-6">
+                                    <textarea id="description" type="password" placeholder="" class="form-control" style="height: 80px;"></textarea>
+                                  </div>
+                                </div>
+                                <div class="form-group row">       
+                                  <label class="col-sm-3 form-control-label">Time Slot</label>
+                                  <div class="col-md-6 select mb-3">
+                                    <select name="account" class="form-control">
+                                      <option>09:00 to 13:00</option>
+                                      <option>13:00 to 18:00</option>
+                                      <option>09:00 to 18:00</option>
+                                    </select>
+                                  </div>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row justify-content-center">
+                        <div class="col-lg-4 col-md-5 mx-auto">
+                          <button type="reset" id="refresh" class="btn btn-secondary ml-4 mr-2">Clear</button>
+                          <button type="submit" class="btn btn-primary ml-2">Submit</button>
+                        </div>
+                      </div>
+                    </form>
+
                   </div>
                 </div>
+
               </div>
             </div>
           </section>
+
         </div>
 
         <!-----Footer--------------------------------------------------------------------------------------------->
@@ -165,7 +262,7 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-6 text-center text-md-left text-primary">
-                <p class="mb-2 mb-md-0">Your company &copy; 2018-2020</p>
+                <p class="mb-2 mb-md-0">Mini Bois &copy; 2019</p>
               </div>
               <div class="col-md-6 text-center text-md-right text-gray-400">
                 <p class="mb-0">Design by <a href="https://bootstrapious.com/admin-templates" class="external text-gray-400">Mini Bois</a></p>
@@ -187,20 +284,19 @@
     <script src="js/front.js"></script>
 
     <script type="text/javascript">
-        function success() {
-
-          m = document.getElementById("msg");
-          m.style.display = "block";
-
-          event.preventDefault();
-        }
-
-        $(document).ready(function(){
+      
+      $(document).ready(function(){
         $('[data-toggle="popover"]').popover({
-            placement : 'bottom',
+            placement : 'top',
             trigger : 'hover'
         });
-    });
+
+        $("#refresh").click(function () { 
+          location.reload(true); 
+        }); 
+
+      });
+
     </script>
   </body>
 </html>
