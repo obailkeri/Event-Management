@@ -85,8 +85,8 @@
               <li class="sidebar-list-item"><a href="index.html" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
               <!-- <li class="sidebar-list-item"><a href="tables.html" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>Tables</span></a></li> -->
               <li class="sidebar-list-item"><a href="forms.html" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>New Event</span></a></li>
-              
-            <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages1" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Event Proposals</span></a>
+
+          <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages1" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Event Proposals</span></a>
             <div id="pages1" class="collapse">
               <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
                 <li class="sidebar-list-item"><a href="eventProp_new.html" class="sidebar-link text-muted pl-lg-5">New Proposals</a></li>
@@ -114,157 +114,46 @@
           <section class="py-4">
           </section>
 
-          <section id="msg" style="display: none;">
-            <div class="alert alert-success">
-              <strong>Success!</strong> Message sent Successfully
-            </div>
-          </section>
-
-          <section id="msg0" style="display: none;">
-            <div class="alert alert-danger">
-              <strong>Ops!</strong> Please select ACCEPTED or REJECTED
-            </div>
-          </section>
-
           <section>
             <div class="row">
               <div class="col-lg-12 mb-4">
-                
                 <div class="card">
                   <div class="card-header">
-                    <div class="row">
-                      <div class="col-sm-3">
-                        <h3 class="h6 text-uppercase mb-0">Event Name</h3>
-                      </div>
-                      <div class="col-sm-3"></div>
-                      <div class="col-sm-6">
-                        <h3 class="h6 text-uppercase mb-0">Sender : <span>John</span></h3>
-                      </div>
-                    </div>
+                    <h6 class="text-uppercase mb-0">New Event Proposals</h6>
                   </div>
-
-                  <div class="card-body">
-
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="row py-3">
-                          <div class="col-md-2">Head Organiser</div>
-                          <div class="col-md-1">:</div>
-                          <div class="col-md-9"><i>Mark</i></div>
-                        </div>
-                        <div class="row py-3">
-                          <div class="col-md-2">Start Date</div>
-                          <div class="col-md-1">:</div>
-                          <div class="col-md-9"><i></i></div>
-                        </div>
-                        <div class="row py-3">
-                          <div class="col-md-2">End Date</div>
-                          <div class="col-md-1">:</div>
-                          <div class="col-md-9"><i></i></div>
-                        </div>
-                        <div class="row py-3">
-                          <div class="col-md-2">Event Description</div>
-                          <div class="col-md-1">:</div>
-                          <div class="col-md-9"><i>Duis aute irure dolor in reprehenderit in voluptate velit esse
-                              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</i></div>
-                        </div>
-
-                            
-                      </div>
-                    </div>
-
-                    <section class="py-3"></section>
-
-                    <div class="row">
-                      <div class="col-md-12">
-                          <form action="#" onsubmit="validate()">
-                            <div class="form-group">
-                              <div class="row">
-                                <div class="col-md-3"></div>
-                                <div class="custom-control custom-radio custom-control-inline col-md-3">
-                                  <input id="customRadioInline1" type="radio" name="customRadioInline1" class="custom-control-input">
-                                  <label for="customRadioInline1" class="custom-control-label"><h4>Accept</h4></label>
-                                </div>
-                                <div class="custom-control custom-radio custom-control-inline col-md-3">
-                                  <input id="customRadioInline2" type="radio" name="customRadioInline1" class="custom-control-input">
-                                  <label for="customRadioInline2" class="custom-control-label"><h4>Reject</h4></label>
-                                </div>
-                                <div class="col-md-3"></div>
-                              </div>
-                            </div>
-                            <br>
-                            <div class="row">
-                              <div class="col-md-10"></div>
-                              <div class="form-group col-md-2">       
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                              </div>
-                            </div>
-                          </form>
-                      </div>
-                    </div>
-
+                  <div class="card-body">                           
+                    <table class="table table-striped card-text">
+                      <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Event Name</th>
+                          <th>Sender</th>
+                          <th>Details</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <th scope="row">1</th>
+                          <td>Event2</td>
+                          <td>Otto</td>
+                          <td><a href="eventProp_detail.html"><button class="btn-sm btn-primary">View</button></a></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">2</th>
+                          <td>Event5</td>
+                          <td>Thornton</td>
+                          <td><a href="eventProp_detail.html"><button class="btn-sm btn-primary">View</button></a></td>
+                        </tr>
+                        <tr>
+                          <th scope="row">3</th>
+                          <td>Event6</td>
+                          <td>the Bird</td>
+                          <td><a href="eventProp_detail.html"><button class="btn-sm btn-primary">View</button></a></td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
-
-                  <section class="py-2"></section>
-
-                  <div class="card">
-                    <div class="card-header">
-                      <h3 class="h6 text-uppercase mb-0">Messaging</h3>
-                    </div>
-
-                    <div class="card-body">
-                      <form action="#">
-                        <br>
-                        <div class="form-group">
-                          <label>Message</label>
-                          <textarea type="textarea" class="form-control" style="height: 80px;"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                          <div class="row justify-content-right">
-                            <div class="col-10"></div>
-                            <div class="col-2">
-                              <input type="submit" value="Send" class="btn btn-primary">
-                            </div>
-                          </div>
-                        </div>
-                      </form>
-
-                      <section>
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="card mb-lg-0">         
-                              <div class="card-header">
-                                <h2 class="h6 mb-0 text-uppercase">Sender</h2>
-                              </div>
-                              <div class="card-body">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-                            </div>
-                          </div>
-                        </div>
-                      </section>
-
-                      <section class="py-2"></section>
-
-                      <section>
-                        <div class="row">
-                          <div class="col-lg-12">
-                            <div class="card mb-lg-0">         
-                              <div class="card-header">
-                                <h2 class="h6 mb-0 text-uppercase">Sender</h2>
-                              </div>
-                              <div class="card-body">Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                          cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                          proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</div>
-                            </div>
-                          </div>
-                        </div>
-                      </section>
-
-                    </div>
-                  </div>
-
               </div>
             </div>
           </section>
@@ -298,44 +187,20 @@
     <script src="js/front.js"></script>
 
     <script type="text/javascript">
-      function validate() {
-        //alert("Please select ACCEPT or REJECT !");
-        c1 = document.getElementById("customRadioInline1");
-        c2 = document.getElementById("customRadioInline2");
+        function success() {
 
-        if(c1.checked == false && c2.checked == false) {
-          accept = document.getElementById("msg");
-          reject = document.getElementById("msg0");
-
-          accept.style.display = "none";
-          reject.style.display = "block";
+          m = document.getElementById("msg");
+          m.style.display = "block";
 
           event.preventDefault();
-
-          $("html, body").animate({ scrollTop: 0 }, 600);
         }
-        else {
-          success();
-        }
-      }
 
-      function success() {
-        accept = document.getElementById("msg");
-        reject = document.getElementById("msg0");
-        
-        accept.style.display = "block";
-        reject.style.display = "none";
-
-        $("html, body").animate({ scrollTop: 0 }, 600);
-      }
-
-      $(document).ready(function(){
-      $('[data-toggle="popover"]').popover({
-          placement : 'bottom',
-          trigger : 'hover'
+        $(document).ready(function(){
+        $('[data-toggle="popover"]').popover({
+            placement : 'bottom',
+            trigger : 'hover'
         });
-      });
-
+    });
     </script>
   </body>
 </html>
