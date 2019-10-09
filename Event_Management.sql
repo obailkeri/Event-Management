@@ -268,6 +268,7 @@ CREATE TABLE `room` (
   `projector_support` int(11) NOT NULL CHECK (`projector_support` in (0,1)),
   `capacity` int(11) NOT NULL,
   `emp_incharge` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`room_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -278,7 +279,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,'mllab',20,0,20,'');
+INSERT INTO `room` VALUES (1,'mllab',20,0,20,'','');
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -404,6 +405,7 @@ DROP TABLE IF EXISTS `student`;
 CREATE TABLE `student` (
   `student_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `contact_no` int(11) NOT NULL,
   `id_no` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`student_id`),
@@ -432,6 +434,7 @@ CREATE TABLE `users` (
   `password` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
   `access_level` int(11) NOT NULL CHECK (`access_level` in (0,1,2,3,4,5)),
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `org_id` int(11) DEFAULT NULL,
   `email_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL CHECK (`email_id` like '%@%.com'),
   PRIMARY KEY (`username`),
@@ -446,7 +449,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('aj10','aj10',1,'Atharva',1,'ayhu@.com'),('ap','ap',1,'Ayushi',1,'122@.com'),('princi','princi',2,'princi',1,'ema@.com'),('test','test123',1,'test',1,'as@.com'),('test1','test',1,'test',1,'@.com');
+INSERT INTO `users` VALUES ('aj10','aj10',1,'Atharva','',1,'ayhu@.com'),('ap','ap',1,'Ayushi','',1,'122@.com'),('princi','princi',2,'princi','',1,'ema@.com'),('test','test123',1,'test','',1,'as@.com'),('test1','test',1,'test','',1,'@.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -459,4 +462,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-08 16:56:43
+-- Dump completed on 2019-10-09 11:01:41
