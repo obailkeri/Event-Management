@@ -1,8 +1,8 @@
--- MariaDB dump 10.17  Distrib 10.4.7-MariaDB, for Linux (x86_64)
+-- MariaDB dump 10.17  Distrib 10.4.8-MariaDB, for Linux (x86_64)
 --
 -- Host: localhost    Database: Event_Management
 -- ------------------------------------------------------
--- Server version	10.4.7-MariaDB
+-- Server version	10.4.8-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -26,7 +26,7 @@ CREATE TABLE `event_communication` (
   `event_id` int(11) NOT NULL,
   `message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `communication_number` int(11) NOT NULL,
-  `communication_flag` int(11) DEFAULT NULL CHECK (`communication_flag` in (0,1,2)),
+  `communication_flag` int(11) DEFAULT NULL,
   KEY `fk4` (`event_id`),
   CONSTRAINT `fk4` FOREIGN KEY (`event_id`) REFERENCES `event_ledger` (`event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -38,6 +38,7 @@ CREATE TABLE `event_communication` (
 
 LOCK TABLES `event_communication` WRITE;
 /*!40000 ALTER TABLE `event_communication` DISABLE KEYS */;
+INSERT INTO `event_communication` VALUES (19,'hello',1,0);
 /*!40000 ALTER TABLE `event_communication` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -52,7 +53,7 @@ CREATE TABLE `event_communication_history` (
   `event_id` int(11) NOT NULL,
   `message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `communication_number` int(11) NOT NULL,
-  `communication_flag` int(11) DEFAULT NULL CHECK (`communication_flag` in (0,1,2))
+  `communication_flag` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -77,14 +78,14 @@ CREATE TABLE `event_ledger` (
   `event_name` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status_level` int(11) NOT NULL CHECK (`status_level` in (1,2,3,4,5,6)),
-  `prev_status_level` int(11) DEFAULT NULL CHECK (`prev_status_level` in (1,2,3,4,5,6)),
+  `status_level` int(11) NOT NULL,
+  `prev_status_level` int(11) DEFAULT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   PRIMARY KEY (`event_id`),
   KEY `username` (`username`),
   CONSTRAINT `event_ledger_ibfk_1` FOREIGN KEY (`username`) REFERENCES `users` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -93,7 +94,7 @@ CREATE TABLE `event_ledger` (
 
 LOCK TABLES `event_ledger` WRITE;
 /*!40000 ALTER TABLE `event_ledger` DISABLE KEYS */;
-INSERT INTO `event_ledger` VALUES (1,'A1','sdfvs','aj10',1,1,'2018-08-10','2018-08-11'),(2,'A2','sdfvs','aj10',1,1,'2017-08-10','2017-08-11'),(3,'A3','sdfvs','aj10',1,1,'2016-08-10','2016-08-11'),(4,'A4','sdfvs','aj10',1,1,'2015-08-10','2015-08-11'),(5,'A5','sdfvs','aj10',1,1,'2014-08-10','2014-08-11'),(6,'P1','sad','ap',1,1,'2013-08-11','2013-08-12'),(7,'T1','sadsa','test',6,1,'2020-08-10','2020-08-11'),(8,'Csd','dsadsa','test',5,1,'2019-10-23','2019-10-26');
+INSERT INTO `event_ledger` VALUES (19,'A','A','aj10',3,3,'2019-10-23','2019-10-24'),(20,'8','8','aj10',3,3,'2019-10-23','2019-11-01'),(21,'1','1','aj10',3,3,'2019-10-23','2019-11-01'),(22,'2','2','aj10',5,5,'2019-10-23','2019-11-08');
 /*!40000 ALTER TABLE `event_ledger` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -109,8 +110,8 @@ CREATE TABLE `event_ledger_history` (
   `event_name` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `username` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `status_level` int(11) NOT NULL CHECK (`status_level` in (1,2,3,4,5,6)),
-  `prev_status_level` int(11) DEFAULT NULL CHECK (`prev_status_level` in (1,2,3,4,5,6)),
+  `status_level` int(11) NOT NULL,
+  `prev_status_level` int(11) DEFAULT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -134,10 +135,10 @@ DROP TABLE IF EXISTS `misc_ledger`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `misc_ledger` (
   `event_id` int(11) DEFAULT NULL,
-  `request_number` int(11) NOT NULL,
+  `permission_type` int(11) DEFAULT NULL,
   `req_start` date NOT NULL,
   `req_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `request_category` int(11) NOT NULL CHECK (`request_category` in (1,2,3,4,5)),
+  `request_status` int(11) DEFAULT NULL,
   `req_end` date NOT NULL,
   KEY `event_id` (`event_id`),
   CONSTRAINT `misc_ledger_ibfk_1` FOREIGN KEY (`event_id`) REFERENCES `event_ledger` (`event_id`)
@@ -165,7 +166,7 @@ CREATE TABLE `misc_ledger_history` (
   `request_number` int(11) NOT NULL,
   `req_start` date NOT NULL,
   `req_description` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `request_category` int(11) NOT NULL CHECK (`request_category` in (1,2,3,4,5)),
+  `request_category` int(11) NOT NULL,
   `req_end` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -214,7 +215,7 @@ CREATE TABLE `resource_communication` (
   `event_id` int(11) NOT NULL,
   `message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `communication_number` int(11) NOT NULL,
-  `communication_flag` int(11) DEFAULT NULL CHECK (`communication_flag` in (0,1,2)),
+  `communication_flag` int(11) DEFAULT NULL,
   KEY `fk12` (`event_id`),
   CONSTRAINT `fk12` FOREIGN KEY (`event_id`) REFERENCES `event_ledger` (`event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -226,7 +227,7 @@ CREATE TABLE `resource_communication` (
 
 LOCK TABLES `resource_communication` WRITE;
 /*!40000 ALTER TABLE `resource_communication` DISABLE KEYS */;
-INSERT INTO `resource_communication` VALUES (8,'hello',1,0);
+INSERT INTO `resource_communication` VALUES (19,'Permissin Granted : Best Of Luck !',1,1),(20,'You can go ahead ! I am with you !',1,1),(19,'Please Select Another set of rooms for your event',2,1),(19,'Please Select Another set of rooms for your event',2,1),(20,'Permissin Granted : Best Of Luck !',2,1),(20,'nice work bois',3,0),(20,'k',4,0),(20,'r',5,0),(20,'u',6,0),(20,'a',7,0),(20,'Please Select Another set of rooms for your event',1,1),(21,'Please Select Another set of rooms for your event',1,1),(22,'You can go ahead ! I am with you !',1,1);
 /*!40000 ALTER TABLE `resource_communication` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -241,7 +242,7 @@ CREATE TABLE `resource_communication_history` (
   `event_id` int(11) NOT NULL,
   `message` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `communication_number` int(11) NOT NULL,
-  `communication_flag` int(11) DEFAULT NULL CHECK (`communication_flag` in (0,1,2))
+  `communication_flag` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -265,12 +266,11 @@ CREATE TABLE `room` (
   `room_id` int(11) NOT NULL AUTO_INCREMENT,
   `room_name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `num_computers` int(11) NOT NULL,
-  `projector_support` int(11) NOT NULL CHECK (`projector_support` in (0,1)),
+  `projector_support` int(11) NOT NULL,
   `capacity` int(11) NOT NULL,
   `emp_incharge` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`room_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -279,7 +279,7 @@ CREATE TABLE `room` (
 
 LOCK TABLES `room` WRITE;
 /*!40000 ALTER TABLE `room` DISABLE KEYS */;
-INSERT INTO `room` VALUES (1,'mllab',20,0,20,'','');
+INSERT INTO `room` VALUES (1,'mllab',20,0,20,'Mr.Kambale Sir'),(2,'classroom-201',20,1,50,'Mr.Murumkar Sir'),(3,'classroom-301',20,1,50,'Mr.Patil Sir'),(4,'classroom-401',20,1,50,'Mr.Bansod Sir'),(5,'IT-Seminar Hall',200,3,2,'Mrs.Jagdale Ma\'am'),(6,'CS-Seminar Hall',200,3,2,'Mrs.Joshi Ma\'am'),(7,'ENTC-Seminar Hall',500,1,1,'Mr.Jadhav Sir'),(8,'Auditorium',1000,5,4,'Mr.Pande Sir'),(9,'Ground',1000,0,0,'Mr.Dhoni Sir');
 /*!40000 ALTER TABLE `room` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,13 +292,10 @@ DROP TABLE IF EXISTS `security_acknowledgement`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `security_acknowledgement` (
   `event_id` int(11) NOT NULL,
-  `student_id` int(11) NOT NULL,
   `in_time` time NOT NULL,
   `out_time` time NOT NULL,
   KEY `fk13` (`event_id`),
-  KEY `fk14` (`student_id`),
-  CONSTRAINT `fk13` FOREIGN KEY (`event_id`) REFERENCES `event_ledger` (`event_id`),
-  CONSTRAINT `fk14` FOREIGN KEY (`student_id`) REFERENCES `student` (`student_id`)
+  CONSTRAINT `fk13` FOREIGN KEY (`event_id`) REFERENCES `event_ledger` (`event_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -345,12 +342,11 @@ DROP TABLE IF EXISTS `slots_and_details`;
 CREATE TABLE `slots_and_details` (
   `event_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
-  `status_level` int(11) NOT NULL CHECK (`status_level` in (1,2,3,4,5,6)),
-  `prev_status_level` int(11) NOT NULL CHECK (`prev_status_level` in (1,2,3,4,5,6)),
+  `status_level` int(11) NOT NULL,
+  `prev_status_level` int(11) NOT NULL,
   `purpose` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `purpose_explained` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `time_slot_start` time NOT NULL,
-  `time_slot_end` time NOT NULL,
+  `time_slot` int(11) DEFAULT NULL,
   KEY `fk1` (`room_id`),
   KEY `fk3` (`event_id`),
   CONSTRAINT `fk1` FOREIGN KEY (`room_id`) REFERENCES `room` (`room_id`),
@@ -364,8 +360,29 @@ CREATE TABLE `slots_and_details` (
 
 LOCK TABLES `slots_and_details` WRITE;
 /*!40000 ALTER TABLE `slots_and_details` DISABLE KEYS */;
+INSERT INTO `slots_and_details` VALUES (22,3,1,1,'3 ','',1);
 /*!40000 ALTER TABLE `slots_and_details` ENABLE KEYS */;
 UNLOCK TABLES;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`pratham`@`localhost`*/ /*!50003 trigger update_status_4
+  after insert
+  on slots_and_details for each row
+  begin
+  update `event_ledger` set status_level=4 where event_id=NEW.event_id;
+  end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 
 --
 -- Table structure for table `slots_and_details_history`
@@ -377,8 +394,8 @@ DROP TABLE IF EXISTS `slots_and_details_history`;
 CREATE TABLE `slots_and_details_history` (
   `event_id` int(11) NOT NULL,
   `room_id` int(11) NOT NULL,
-  `status_level` int(11) NOT NULL CHECK (`status_level` in (1,2,3,4,5,6)),
-  `prev_status_level` int(11) NOT NULL CHECK (`prev_status_level` in (1,2,3,4,5,6)),
+  `status_level` int(11) NOT NULL,
+  `prev_status_level` int(11) NOT NULL,
   `purpose` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `purpose_explained` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `time_slot_start` time NOT NULL,
@@ -396,30 +413,25 @@ LOCK TABLES `slots_and_details_history` WRITE;
 UNLOCK TABLES;
 
 --
--- Table structure for table `student`
+-- Table structure for table `test`
 --
 
-DROP TABLE IF EXISTS `student`;
+DROP TABLE IF EXISTS `test`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `student` (
-  `student_id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `contact_no` int(11) NOT NULL,
-  `id_no` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`student_id`),
-  UNIQUE KEY `id_no` (`id_no`)
+CREATE TABLE `test` (
+  `id` int(11) DEFAULT NULL,
+  `t` time DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `student`
+-- Dumping data for table `test`
 --
 
-LOCK TABLES `student` WRITE;
-/*!40000 ALTER TABLE `student` DISABLE KEYS */;
-/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+LOCK TABLES `test` WRITE;
+/*!40000 ALTER TABLE `test` DISABLE KEYS */;
+/*!40000 ALTER TABLE `test` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -432,11 +444,10 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `access_level` int(11) NOT NULL CHECK (`access_level` in (0,1,2,3,4,5)),
+  `access_level` int(11) NOT NULL,
   `name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `org_id` int(11) DEFAULT NULL,
-  `email_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL CHECK (`email_id` like '%@%.com'),
+  `email_id` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`username`),
   KEY `org_id` (`org_id`),
   CONSTRAINT `users_ibfk_1` FOREIGN KEY (`org_id`) REFERENCES `organization` (`org_id`)
@@ -449,7 +460,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES ('aj10','aj10',1,'Atharva','',1,'ayhu@.com'),('ap','ap',1,'Ayushi','',1,'122@.com'),('princi','princi',2,'princi','',1,'ema@.com'),('test','test123',1,'test','',1,'as@.com'),('test1','test',1,'test','',1,'@.com');
+INSERT INTO `users` VALUES ('aj10','aj10',1,'Atharva',1,'ayhu@.com'),('ap','ap',1,'Ayushi',1,'122@.com'),('hod','1',3,'MOD',1,'ayhu@.com'),('princi','princi',2,'princi',1,'ema@.com'),('test','test123',1,'test',1,'as@.com'),('test1','test',1,'test',1,'@.com');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -462,4 +473,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-10-09 11:01:41
+-- Dump completed on 2019-10-23  0:01:02
