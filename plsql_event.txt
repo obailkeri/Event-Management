@@ -1,0 +1,114 @@
+-------------Triggers---------------
+
+delimiter //
+create trigger update_status_4
+after insert
+on slots_and_details for each row
+begin
+update `event_ledger` set status_level=4 where event_id=NEW.event_id;
+end
+//
+
+delimiter //
+create trigger event_completed_c
+before delete
+on event_communication for each row
+begin
+	insert into event_communication_history values(OLD.event_id, OLD.message, OLD.communication_number, OLD.communication_flag);
+end
+//
+
+delimiter //
+create trigger event_completed_sa
+before delete
+on security_acknowledgement for each row
+begin
+	insert into security_acknowledgement_history values(OLD.event_id, OLD.student_id, OLD.in_time, OLD.out_time);
+end
+//
+
+delimiter //
+create trigger event_completed_ml
+before delete
+on misc_ledger for each row
+begin
+	insert into misc_ledger_history values(OLD.event_id, OLD.permission_type, OLD.req_start, OLD.req_description, OLD.request_status, OLD.req_end);
+end
+//
+
+delimiter //
+create trigger event_completed_rc
+before delete
+on resource_communication for each row
+begin
+	insert into resource_communication_history values(OLD.event_id, OLD.message, OLD.communication_number, OLD.communication_flag);
+end
+//
+
+delimiter //
+create trigger event_completed_sd
+before delete
+on slots_and_details for each row
+begin
+	insert into slots_and_details_history values (OLD.event_id, OLD.room_id, OLD.status_level, OLD.prev_status_level, OLD.purpose, OLD.purpose_explained, OLD.time_slot);
+end
+//
+
+delimiter //
+create trigger event_completed
+before delete
+on event_ledger for each row
+begin
+	delete from event_communication where event_id=OLD.event_id;
+	delete from misc_ledger where event_id=OLD.event_id;
+	delete from resource_communication where event_id=OLD.event_id;
+	delete from security_acknowledgement where event_id=OLD.event_id;
+	delete from slots_and_details where event_id=OLD.event_id;
+	insert into event_ledger_history values (OLD.event_id, OLD.event_name, OLD.description, OLD.username, OLD.status_level, OLD.prev_status_level, OLD.start_date, OLD.end_date);
+end
+//
+
+-----------Cursor---------------
+
+delimiter //
+DROP PROCEDURE IF EXISTS get_row_number;
+
+create procedure get_row_number(in uname varchar(20))
+begin
+    declare v_name varchar(20);
+    declare id integer default 0;
+
+    DECLARE s DATE;
+
+    declare event_a int;
+        
+    declare v_finished integer default 0;
+        
+    declare c1 cursor for select username , start_date from event_ledger order by start_date asc ;
+
+    declare continue handler for NOT FOUND set v_finished = 1;
+
+    open c1; 
+
+    get_id : LOOP
+            
+        fetch c1 into v_name , s;
+            
+        SET id:= (id+1);
+            
+        if (v_finished=1 ) then
+            leave get_id;
+        end if;
+
+        if (v_name = uname ) then
+            leave get_id;
+        end if;
+   
+    END LOOP get_id;
+        
+    select id ;
+        
+    close c1;    
+end //
+
+-----------------------------------------
