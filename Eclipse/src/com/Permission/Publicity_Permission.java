@@ -3,14 +3,12 @@ package com.Permission;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.text.SimpleDateFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.DataBaseConnection.GetConnection;
 
@@ -23,56 +21,33 @@ public class Publicity_Permission extends HttpServlet {
     
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		
-		try {
-				HttpSession session = request.getSession();
+		String update_misc_ledger = null;
+		System.out.print("++++++++++++++" + (String)request.getParameter("customRadioInline1"));
+		if(request.getParameter("customRadioInline1") != null)
+		{
+			int Decision =Integer.parseInt(request.getParameter("customRadioInline1")); // 1 ==> Accept , Publicity // 2 ==> Reject
+			{
+				if(Decision == 1)
+					update_misc_ledger = "update misc_ledger set request_status = 3  where event_id=? and permission_type = 1";
+		 		else
+		 			update_misc_ledger = "update misc_ledger set request_status = 2  where event_id=? and permission_type = 1";
 				
-				SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		        
-		        String sql = "insert into misc_ledger values( ? , 1 , ? , ? , 1 , ? ) ";
-		        
-		        String Discripition = "OK";
-		      
-		        java.util.Date util_StartDate =format.parse(request.getParameter("start_date2"));
-		        
-		        java.sql.Date sql_StartDate = new java.sql.Date( util_StartDate.getTime() );
-		
-		        java.util.Date util_EndDate = format.parse(request.getParameter("end_date2"));
-		      
-		        java.sql.Date sql_EndDate = new java.sql.Date( util_EndDate.getTime() );
-		        
-		        Connection con = (Connection) GetConnection.getConnection();
-		       
-		        PreparedStatement st = (PreparedStatement) con .prepareStatement(sql);  // Create a Query
-		        
-	
-		      
-		        st.setInt(1, Integer.parseInt((String)session.getAttribute("event_id")));
-		        
-		        
-		        System.out.print((Integer.parseInt((String)session.getAttribute("event_id"))));
-		        
-		        st.setDate(2, sql_StartDate);
-		        
-		        st.setString(3, Discripition);
-		        
-		        st.setDate(4, sql_EndDate);
-		      
-		        st.execute();
-		      
-		        
-		        
-		        
-		        
-		        response.sendRedirect("my_events_detail.jsp");
-				
+				try {
+				 	Connection con = (Connection) GetConnection.getConnection();
+				 	PreparedStatement st = (PreparedStatement)con.prepareStatement(update_misc_ledger);
+				 	System.out.print(Integer.parseInt((String)request.getParameter("submit")));
+				 	st.setInt(1, Integer.parseInt((String)request.getParameter("submit")));
+				 	int i = st.executeUpdate();
+				}
+				catch(Exception ex)
+				{
+					ex.printStackTrace();
+				}
+
 			}
+		}
 		
-		catch (Exception e) {
-	        e.printStackTrace();
-	    }
-		
-		
+		response.sendRedirect("DashBoard_Principal.jsp");
 	}
 
 }

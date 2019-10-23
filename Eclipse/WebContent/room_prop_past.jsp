@@ -160,7 +160,7 @@
 		                   	
 		                  	try
 		                  	{
-		                  		String sql = "select * from event_ledger where status_level = 6  order by start_date desc ";
+		                  		String sql = "select * from event_ledger where status_level > 4  order by start_date desc ";
 		                  		con = (Connection) GetConnection.getConnection();
 		                  		st = con.prepareStatement(sql);
 		                  		String Username =(String)session.getAttribute("username");
