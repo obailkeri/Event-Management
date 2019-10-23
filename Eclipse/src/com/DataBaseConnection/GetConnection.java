@@ -9,8 +9,8 @@ public class GetConnection
 {
     private static String url = "jdbc:mysql://localhost:3306/Event_Management?useSSL=false";
     private static String Driver = "com.mysql.jdbc.Driver";   
-    private static String username = "";   
-    private static String password = "";
+    private static String username = "Aditya";   
+    private static String password = "123";
     private static Connection con;
     private static String urlstring;
 

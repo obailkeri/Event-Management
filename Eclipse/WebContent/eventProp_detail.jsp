@@ -239,7 +239,7 @@
                         <div class="row py-3">
                           <div class="col-md-2">Head Organiser</div>
                           <div class="col-md-1">:</div>
-                          <div class="col-md-9"><i>Mark</i></div>
+                          <div class="col-md-9"><i><%= rs_1.getString(9)  %></i></div>
                         </div>
                         <div class="row py-3">
                           <div class="col-md-2">Start Date</div>

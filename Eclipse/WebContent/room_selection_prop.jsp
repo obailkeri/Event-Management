@@ -469,7 +469,7 @@ input:disabled {
                                   <label for="customRadioInline22" class="custom-control-label"><h4>Reject</h4></label>
                                 </div>
                                 <div class="col-md-3">
-                                <input type="submit" class="btn btn-primary ml-2">Submit</button>
+                                <input type="submit" class="btn btn-primary ml-2"></button>
                                 </div>
                               </div>
                             </div>
