@@ -33,7 +33,9 @@
     <link rel="stylesheet" href="css/orionicons.css">
     <!-- theme stylesheet-->
     <link rel="stylesheet" href="css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="css/custom.css">
+    <!-- Favicon-->
     <link href="css/icon.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -119,19 +121,18 @@
       <!-----Side-Bar--------------------------------------------------------------------------------------------->
 
       <div id="sidebar" class="sidebar py-3">
-        <ul class="sidebar-menu list-unstyled">
-              <li class="sidebar-list-item"><a href="DashBoard.jsp" class="sidebar-link text-muted"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
+       <ul class="sidebar-menu list-unstyled">
+              <li class="sidebar-list-item"><a href="DashBoard.jsp" class="sidebar-link text-muted active"><i class="o-home-1 mr-3 text-gray"></i><span>Home</span></a></li>
               <!-- <li class="sidebar-list-item"><a href="tables.html" class="sidebar-link text-muted"><i class="o-table-content-1 mr-3 text-gray"></i><span>Tables</span></a></li> -->
-              <li class="sidebar-list-item"><a href="forms.html" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>New Event</span></a></li>
-          <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted active"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Events</span></a>
+              <li class="sidebar-list-item"><a href="form.jsp" class="sidebar-link text-muted"><i class="o-survey-1 mr-3 text-gray"></i><span>New Event</span></a></li>
+          <li class="sidebar-list-item"><a href="#" data-toggle="collapse" data-target="#pages" aria-expanded="false" aria-controls="pages" class="sidebar-link text-muted"><i class="o-wireframe-1 mr-3 text-gray"></i><span>Events</span></a>
             <div id="pages" class="collapse">
               <ul class="sidebar-menu list-unstyled border-left border-primary border-thick">
-                <li class="sidebar-list-item"><a href="past_events.html" class="sidebar-link text-muted pl-lg-5">Past Events</a></li>
-                <li class="sidebar-list-item"><a href="my_events.html" class="sidebar-link text-muted pl-lg-5">My Events</a></li>
-              </ul>
+                <li class="sidebar-list-item"><a href="past_events.jsp" class="sidebar-link text-muted pl-lg-5">Past Events</a></li>
+                <li class="sidebar-list-item"><a href="my_events.jsp" class="sidebar-link text-muted pl-lg-5">My Events</a></li>
             </div>
           </li>
-              <li class="sidebar-list-item"><a href="login.html" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Login</span></a></li>
+              <li class="sidebar-list-item"><a href="Login.jsp" class="sidebar-link text-muted"><i class="o-exit-1 mr-3 text-gray"></i><span>Login</span></a></li>
         </ul>
       </div>
 
@@ -180,7 +181,6 @@
             		st.setInt(1, id);
             		
             		rs_1 = st.executeQuery();
-            	
             		
             		st = null;
             		
@@ -212,7 +212,8 @@
             		  {
             			  rs_1.next();	
             		  }
-            		
+            		do/* ( (rs_1.next())) */
+            		{
             	%>
             	
 
@@ -230,7 +231,6 @@
 
                     <div class="card-body">
 					<%
-					
 						if( rs_1.getInt(5) >= 3)
 						{
 					
@@ -274,55 +274,16 @@
                         </div>
 					
 						<%
-						String sql3="select * from event_ledger join misc_ledger using(event_id) where event_id = ? and permission_type=2";
-						Connection con3=null;
-						ResultSet temp1=null;
-						PreparedStatement st3=null;
-						con3 = (Connection) GetConnection.getConnection();
-						st3 = con3.prepareStatement(sql3);
-						st3.setInt(1,id);
-						temp1=st3.executeQuery();
-						int flag=0;
-						Date d=null,d2=null;
-						int status=-1;
-						if(temp1.next())
+						if( rs_1.getInt(5) >= 3 )
 						{
-							flag=1;
-							d=temp1.getDate(10);
-							d2=temp1.getDate(13);
-							status=temp1.getInt(12);
-						}
-						if( !join_fail )
-						{
-						%>
-           				 	<div class="row py-3">
-                          	<div class="col-md-2">Flex Start Date : </div>
-                          	<div class="col-md-1">:</div>
-                          	<% if (flag == 1  )
-                          		{ %>
-                          		<div class="col-md-9 d-inline"><i><%= d  %></i>
-                         		<% if (  status==3)
-                         			{ %>
-                         				<div class="col-md -12 d-inline my-5 ml-lg-0"><i class="fa fa-check-circle fa-2x" aria-hidden="true"  ></i></div>
-                         		<%	}
-                         			else  
-                         			{ %>
-                         				<div class="col-md -12 d-inline my-5 ml-lg-0">  <i class="fas fa-sync fa-spin"></i></div> 	
-                         		  <%} %>
-                          		</div>
-                          	 <%} 
-                          	  else
-                          	  {%>
-                          		-
-                            <%} %>
-                        	</div>
-                        
-                        <div class="row py-3">
-                          <div class="col-md-2">Flex End Date : </div>
+					
+					%>
+           				 <div class="row py-3">
+                          <div class="col-md-2">Flex Start Date : </div>
                           <div class="col-md-1">:</div>
-                          <% if (flag == 1){  %>
-                          <div class="col-md-9 d-inline"><i><%= d2 %></i>
-                         <% if ( status==3 ){  %>
+                          <% if (!join_fail){ %>
+                          <div class="col-md-9 d-inline""><i><%= rs_1.getDate(10)  %></i>
+                         <% if (  rs_1.getInt(12) == 3 ){ %>
                          	<div class="col-md -12 d-inline my-5 ml-lg-0"><i class="fa fa-check-circle fa-2x" aria-hidden="true"  ></i></div>
                          <%} else { %>
                          	<div class="col-md -12 d-inline my-5 ml-lg-0">  <i class="fas fa-sync fa-spin"></i></div> 	
@@ -333,37 +294,57 @@
                           			-
                           	<%} %>
                         </div>
-                         	<%
-						 sql3="select * from event_ledger join misc_ledger using(event_id) where event_id = ? and permission_type=1";
-						 con3=null;
-					 	temp1=null;
-						 st3=null;
-						con3 = (Connection) GetConnection.getConnection();
-						st3 = con3.prepareStatement(sql3);
-						st3.setInt(1,id);
-						temp1=st3.executeQuery();
-						 flag=0;
-						 d=null;
-						d2=null;
-						 status=-1;
-						if(temp1.next())
-						{
-							flag=1;
-							d=temp1.getDate(10);
-							d2=temp1.getDate(13);
-							status=temp1.getInt(12);
-						}
-						if( !join_fail )
-						{
-						%>
+                        
+                        <div class="row py-3">
+                          <div class="col-md-2">Flex End Date : </div>
+                          <div class="col-md-1">:</div>
+                          <% if (!join_fail){ System.out.print("O-----join-------" ); %>
+                          <div class="col-md-9 d-inline"><i><%= rs_1.getDate(13)  %></i>
+                         <% if (  rs_1.getInt(12) == 3 ){  %>
+                         	<div class="col-md -12 d-inline my-5 ml-lg-0"><i class="fa fa-check-circle fa-2x" aria-hidden="true"  ></i></div>
+                         <%} else { 
+                        	 System.out.println("O------------" );
+                        	 System.out.println(rs_1.getInt(1));
+                        	 System.out.println(rs_1.getString(2));
+                        	 System.out.println(rs_1.getString(3));
+                        	 System.out.println(rs_1.getString(4));
+                        	 System.out.println(rs_1.getInt(5));
+                        	 System.out.println(rs_1.getInt(6));
+                        	 System.out.println(rs_1.getDate(7));
+                        	 System.out.println(rs_1.getDate(8));
+                        	 System.out.println(rs_1.getInt(9));
+                        	 System.out.println(rs_1.getDate(10));
+                        	 System.out.println(rs_1.getString(11));
+                        	 System.out.println(rs_1.getInt(12) ); 
+                        	 System.out.print(rs_1.getDate(13));%>
+                         	<div class="col-md -12 d-inline my-5 ml-lg-0">  <i class="fas fa-sync fa-spin"></i></div> 	
+                         <%} %>
+                          </div>
+                          
+                          <%} else {%>
+                          			-
+                          	<%} %>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                        
                         
                         <div class="row py-3">
                           <div class="col-md-2">Publicity Start Date : </div>
                           <div class="col-md-1">:</div>
-                          <% if (flag==1){  System.out.print("HELLO" );%>
-                          <div class="col-md-9 d-inline"><i><%=d %></i>
-                         <% 
-                         	if (  status==3){ %>
+                          <% if (!join_fail){  System.out.print(rs_1.getInt(9) );%>
+                          <div class="col-md-9 d-inline""><i><%= rs_1.getDate(10)  %></i>
+                         <% if(c == 1){ 
+                         		rs_1.next();
+                         		c++;
+                         		System.out.print("ODDDDDDDDDDDDDDDD " );
+                         		System.out.print(rs_1.getInt(9) );
+                         		
+                         	}
+                         	if (  rs_1.getInt(12) == 3 ){ %>
                          	<div class="col-md -12 d-inline my-5 ml-lg-0"><i class="fa fa-check-circle fa-2x" aria-hidden="true"  ></i></div>
                          <%} else { %>
                          	<div class="col-md -12 d-inline my-5 ml-lg-0">  <i class="fas fa-sync fa-spin"></i></div> 	
@@ -372,60 +353,57 @@
                           
                           <%} else {%>
                           			-
-                          	<%} 
-                          	%>
+                          	<%} %>
                         </div>
                         
                         <div class="row py-3">
                           <div class="col-md-2">Publicity End Date : </div>
                           <div class="col-md-1">:</div>
-                          <% if (flag == 1){ %>
-                          <div class="col-md-9 d-inline"><i><%= d2  %></i>
-                         <% if (  status == 3 ){ %>
+                          <% if (!join_fail){ %>
+                          <div class="col-md-9 d-inline""><i><%= rs_1.getDate(13)  %></i>
+                         <% if (  rs_1.getInt(12) == 3 ){ %>
                          	<div class="col-md -12 d-inline my-5 ml-lg-0"><i class="fa fa-check-circle fa-2x" aria-hidden="true"  ></i></div>
-                         <%} else
-                         	{%>
-                         		<div class="col-md -12 d-inline my-5 ml-lg-0">  <i class="fas fa-sync fa-spin"></i></div> 	
+                         <%} else if (  rs_1.getInt(12) == 2){ %>
+                         	haha	
+                         <%} else {%>
+                         	<div class="col-md -12 d-inline my-5 ml-lg-0">  <i class="fas fa-sync fa-spin"></i></div> 	
                          <%} %>
                           </div>
                           
-                          <% } else {%>
+                          <%} else {%>
                           			-
                           	<%} %>
                         </div>
-                        <%}} %>
+                        
                         
                            <div class="row py-3">
                         	<form action="room_selection.jsp">
-           						<button type="submit" class="btn-sm btn-success mx-3" value="<%=session.getAttribute("event_id") %>" name="btn3" >ClassRoom Selection</button>
+           						<button type="submit" class="btn-sm btn-success mx-3"  value="<%=value %>" name="btn">ClassRoom Selection</button>
            				    </form> 
            				   
            				        <button type="button" data-toggle="modal" data-target="#myModal1" class="btn-sm btn-info mx-3">Flex Permission</button>
                             <div id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
                             <div role="document" class="modal-dialog modal-lg">
                               <div class="modal-content">
-
                                 <div class="modal-header">
                                   <h4 id="exampleModalLabel" class="modal-title">Event Name</h4>
                                   <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                                 </div>
-
                                 <div class="modal-body">
                                   <p>Request for granting permission to put flex in college </p>
-
                                   <form class="form-horizontal" action="user_hoarding_permisson" method="post">
                                     <div class="form-group row">
                                       <label class="col-sm-2 form-control-label">From Date</label>
                                       <div class="col-sm-1"> : </div>
                                       <div class="col-md-3">
-                                        <input id="inputHorizontalSuccess" type="Date" placeholder="" class="form-control form-control-success"  name="start_date1">
+                                        <input id="inputHorizontalSuccess" type="Date" placeholder="" class="form-control form-control-success"  name="start_date">
                                       </div>
                                     </div>
                                     <div class="form-group row">
                                       <label class="col-sm-2 form-control-label">To Date</label>
                                       <div class="col-sm-1"> : </div>
                                       <div class="col-md-3">
-                                        <input id="inputHorizontalWarning" type="Date" placeholder="" class="form-control form-control-warning"  name="end_date1">
+                                        <input id="inputHorizontalWarning" type="Date" placeholder="" class="form-control form-control-warning"  name="end_date">
                                       </div>
                                     </div>
                                     <div class="form-group row">       
@@ -435,61 +413,53 @@
                                       </div>
                                     </div>
                                   </form>
-
                                 </div>
-
                               </div>
                             </div>
                             </div>
-           				  <button type="button" data-toggle="modal" data-target="#myModal2" class="btn-sm btn-info mx-3">Publicity Permission</button>
+           				  <button type="button" data-toggle="modal" data-target="#myModal1" class="btn-sm btn-info mx-3">Publicity Permission</button>
            				  <form action="Princi_letter.jsp" >
            				  	<button type="submit" class="btn-sm btn-success mx-3"  value="<%=value %>" name="btn6">Download Permission Letter</button>
            				  
            				  </form >
-                           <div id="myModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
+                            <div id="myModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" class="modal fade text-left">
                             <div role="document" class="modal-dialog modal-lg">
                               <div class="modal-content">
-
                                 <div class="modal-header">
                                   <h4 id="exampleModalLabel" class="modal-title">Event Name</h4>
                                   <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
                                 </div>
-
                                 <div class="modal-body">
-                                  <p>Request for granting publicity permission in college </p>
-
-                                  <form class="form-horizontal" action="Publicity_Permission" method="post">
+                                  <p>Request for granting Publicity permission </p>
+                                  <form class="form-horizontal" action=#>
                                     <div class="form-group row">
                                       <label class="col-sm-2 form-control-label">From Date</label>
                                       <div class="col-sm-1"> : </div>
                                       <div class="col-md-3">
-                                        <input id="inputHorizontalSuccess" type="Date" placeholder="" class="form-control form-control-success"  name="start_date2">
+                                        <input id="inputHorizontalSuccess" type="Date" placeholder="" class="form-control form-control-success">
                                       </div>
                                     </div>
                                     <div class="form-group row">
                                       <label class="col-sm-2 form-control-label">To Date</label>
                                       <div class="col-sm-1"> : </div>
                                       <div class="col-md-3">
-                                        <input id="inputHorizontalWarning" type="Date" placeholder="" class="form-control form-control-warning"  name="end_date2">
+                                        <input id="inputHorizontalWarning" type="Date" placeholder="" class="form-control form-control-warning">
                                       </div>
                                     </div>
                                     <div class="form-group row">       
                                       <div class="col-md-9 ml-auto">
-                                        <input type="submit" value="Submit" class="btn btn-primary" >
-                                      
+                                       <button type="submit" value="submit_btn" class="btn btn-primary pull-right my-2" style="float:right;" name="submit"  id="submit_btn"> Submit</button> 
                                       </div>
                                     </div>
                                   </form>
-
                                 </div>
-
                               </div>
                             </div>
                             </div>
                              </div>
           		  <% 
-						
-						 if( rs_1.getInt(5) == 2) {
+						}
+						else if( rs_1.getInt(5) == 2) {
 						
                    %>
            				  <button type="button" class="btn btn-primary disabled ">Proceed</button>
@@ -499,34 +469,20 @@
            				 	
            				 	<button type="button" class="btn disabled">Proceed</button>
            				 	
-           				  <%} 
-			
-		                  		
-		                  		
-		                     }
-		                  	
-		                  	catch(Exception ex)
-		                  	{
-		                  			//out.print(ex);
-		                  	}
-                  	
-          %>
+           				  <%} %>
+					
+					
                          
                             
                       </div>
                     </div>
-
-
                     </div>
                   </div>
-
                   <section class="py-2"></section>
-
                   <div class="card">
                     <div class="card-header">
                       <h3 class="h6 text-uppercase mb-0">Messaging</h3>
                     </div>
-
                     <div class="card-body">
                       <form action="user_to_principal_message" method="post">
                         <br>
@@ -534,7 +490,6 @@
                           <label>Message</label>
                           <textarea type="textarea" class="form-control" style="height: 80px;" name="message"></textarea>
                         </div>
-
                         <div class="form-group">
                           <div class="row justify-content-right">
                             <div class="col-10"></div>
@@ -544,8 +499,20 @@
                           </div>
                         </div>
                       </form>
-
-                     	
+                     
+                       
+		<% 	
+			
+		                  		}while(!rs_1.next());
+		                  		
+		                     }
+		                  	
+		                  	catch(Exception ex)
+		                  	{
+		                  			//out.print(ex);
+		                  	}
+                  	
+          %>
                       
                       
         <%
@@ -607,9 +574,14 @@
             		while( rs_1.next() )
             		{
             	%>
-
+            	
+                      
+                      
+                      
+                      
+                        
+                     
                       <section class="py-2"></section>
-
                       <section>
                         <div class="row">
                           <div class="col-lg-12">
@@ -635,14 +607,12 @@
                           </div>
                         </div>
                       </section>
-
                     </div>
-                  
-                </div>
+                  </div>
+                
               </div>
             </div>
           </section>
-
         </div>
         
 		<% 	
@@ -659,7 +629,6 @@
                   	
           %>
         <!-----Footer--------------------------------------------------------------------------------------------->
-
         <footer class="footer bg-white shadow align-self-end py-3 px-xl-5 w-100">
           <div class="container-fluid">
             <div class="row">
@@ -673,10 +642,8 @@
             </div>
           </div>
         </footer>
-	</div>
-	</div>
-      
-    
+      </div>
+    </div>
     <!-- JavaScript files-->
   
     

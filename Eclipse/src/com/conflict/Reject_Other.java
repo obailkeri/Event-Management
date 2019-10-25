@@ -31,6 +31,15 @@ public class Reject_Other extends HttpServlet {
 	 	
 	 	String event_id = (String)session.getAttribute("event_id");
 	 	
+	 	String event_id_1 = (String)session.getAttribute("event_id_1");
+	 	
+	 	if(event_id == null)
+	 	{
+	 		event_id=event_id_1;
+	 	}
+	 	else{
+	 		event_id_1=event_id;
+	 	}
 	 	String Delete_from_Slots_and_detials = null;
 	 	
 	 	String update_event_ledger = null;
@@ -91,7 +100,7 @@ public class Reject_Other extends HttpServlet {
 					 			 	         
 					 	st.setInt(1, Integer.parseInt(event_id));
 					 	
-					 	st.setString(2 , "Permissin Granted : Best Of Luck !" );     // Event description
+					 	st.setString(2 , "Permission Granted : Best Of Luck !" );     // Event description
 					 	
 					 	
 					 	if(rs_change_status_level.next() == false)  				 // if result set is empty
@@ -117,7 +126,8 @@ public class Reject_Other extends HttpServlet {
 					}
 					while(rs.next())
 					{
-						if(rs.getInt(1) == Integer.parseInt(event_id) ) 
+						if(rs.getInt(1) == Integer.parseInt(event_id) || rs.getInt(1) == Integer.parseInt(event_id_1) ) 
+							
 						{
 							
 
@@ -184,7 +194,7 @@ public class Reject_Other extends HttpServlet {
 						 	int i = st.executeUpdate();				
 							continue;
 							
-						}
+						}else {
 						Delete_from_Slots_and_detials  = "delete from slots_and_details where event_id = ?";
 						st = con.prepareStatement(Delete_from_Slots_and_detials);
 						st.setInt(1, rs.getInt(1));
@@ -302,6 +312,7 @@ public class Reject_Other extends HttpServlet {
 				 	
 					 	session.setAttribute("event_id_1", event_id);	
 		
+					}
 					}
 		
 				response.sendRedirect("DashBoard_HOD.jsp");

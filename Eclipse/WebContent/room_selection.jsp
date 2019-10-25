@@ -37,7 +37,6 @@
     <!-- Favicon-->
     <link rel="shortcut icon" href="img/logo.png">
     <script>
-
     if ( window.history.replaceState ) {
         window.history.replaceState( null, null, window.location.href );
     }
@@ -49,7 +48,6 @@
   margin: 0;
   padding: 0;
 }
-
 .seat {
   float: left;
   display: block;
@@ -59,7 +57,6 @@
   width: 60px;
   height: 60px;
 }
-
 .seat1 {
   float: left;
   display: block;
@@ -69,7 +66,6 @@
   width: 60px;
   height: 135px;
 }
-
 .seat2 {
   float: left;
   display: block;
@@ -79,7 +75,6 @@
   width: 135px;
   height: 360px;
 }
-
 input:disabled {
   display: block;
   margin: 5px;
@@ -88,27 +83,21 @@ input:disabled {
   width: 100px;
   height: 110px;
 }
-
 .seat-select {
   display: none;
 }
-
 .seat-select:checked+.seat {
   background: #536DFE;
 }
-
 .seat-select:checked+.seat1 {
   background: #536DFE;
 }
-
 .seat-select:checked+.seat2 {
   background: #536DFE;
 }
-
 </style>
 
 <script>
-
 </script>
   </head>
   <body>
@@ -203,34 +192,7 @@ input:disabled {
 
       <div class="page-holder w-100 d-flex flex-wrap">
         <div class="container-fluid px-xl-5">
-		<%
-		Connection con3=null;
-		ResultSet rs3=null;
-		PreparedStatement st3=null;
-		try
-		{
-		String a=request.getParameter("btn3");
-		
-		System.out.print(a);
-		System.out.println(session.getAttribute( "event_id"));
-		System.out.println(session.getAttribute( "event_id_1"));
-		
-		if(a == null)
-		{
-			a = (String)session.getAttribute( "event_id");
-			if(a == null)
-			{
-				a = (String)session.getAttribute( "event_id_1");
-			}
-		}
-		int id2=Integer.parseInt(a);
-		String sql3="select * from slots_and_details where event_id=?";
-		con3 = (Connection) GetConnection.getConnection();
-		st3 = con3.prepareStatement(sql3);
-		st3.setInt(1,id2);
-		rs3=st3.executeQuery();
-		
-		%>
+
           <section class="py-5">
             <div class="row">
               <div class="col-lg-12 mb-4">
@@ -258,8 +220,8 @@ input:disabled {
                         <label class="col-md-12 form-control-label text-center"><p class="pt-1" style="font-size: 20px;">Select Rooms for your Event</p></label>
                       </div>
 			
-                      <div class="row justify-content-center pb-5">
-                        <div class="col-md-4">
+                      <div class="row d-flex justify-content-center pb-5">
+                        <div class="">
                           <section id="seats">
                             <table>
                               <!-- Row 1 -->
@@ -319,19 +281,16 @@ input:disabled {
                         </div>
                       </div>
 
-                      <div class="row justify-content-center">
-                        <div class="col-lg-4 col-md-5 mx-auto">
-                          <button type="reset" id="refresh" class="btn btn-secondary ml-4 mr-2">Clear</button>
+                      <div class="row d-flex justify-content-center">
+                        <div class="mx-auto">
+                          <button type="reset" id="refresh" class="btn btn-secondary mr-2">Clear</button>
                           <input class="btn btn-primary ml-2" type="submit" value="Next">
                         </div>
                       </div>
                     </form>
 
                   </div>
-                  
                 </div>
-                </div>
-              </div>
 
                 <section class="py-2"></section>
 
@@ -491,7 +450,18 @@ input:disabled {
 
         </div>
         
-       
+        <% 	
+			
+            	  		
+		                  	
+		                     }
+		                  	
+		                  	catch(Exception ex)
+		                  	{
+		                  			out.print(ex);
+		                  	}
+                  	
+          %>
 
         <!-----Footer--------------------------------------------------------------------------------------------->
 
@@ -523,50 +493,20 @@ input:disabled {
     
     <script type="text/javascript">
       
-    $(document).ready(function(){
+      $(document).ready(function(){
         $('[data-toggle="popover"]').popover({
             placement : 'top',
             trigger : 'hover'
         });
-        <% while(rs3.next()) {%>
-        
-        $('tr input[type=checkbox]').filter(function(){
- 		   return this.value === "<%= rs3.getInt(2)  %>" ;
- 		}).prop('checked', true);
-       
-        
-        
         $('input[type="checkbox"]').on('change', function(e){
-          if(!e.target.checked){
-            
-            e.target.checked = true;
-          }
-          else {
-            e.target.checked = false;
+          if(e.target.checked){
+            $('#myModal').modal();
           }
         });
-		<% }%>
         $("#refresh").click(function () { 
           location.reload(true); 
         }); 
       });
     </script>
-     <% 	
-			
-            	  		
-		                  	
-		                     }
-		                  	
-		                  	catch(Exception ex)
-		                  	{
-		                  			out.print(ex);
-		                  	}
-		}
-		catch(Exception e)
-		{
-			
-		}
-                  	
-          %>
   </body>
 </html>

@@ -1,2 +1,2 @@
 # Event-Management
-  Project based on php-mysql
+  Project based on jsp-mysql

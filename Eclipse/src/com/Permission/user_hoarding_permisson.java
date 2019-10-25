@@ -28,15 +28,15 @@ public class user_hoarding_permisson extends HttpServlet {
 			
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	        
-	        String sql = "insert into misc_ledger values( ? , 2 , ? , ? , 1 , ? ) ";
+	        String sql = "insert into misc_ledger values( ? , 1 , ? , ? , 1 , ? ) ";
 	        
 	        String Discripition = "OK";
 	      
-	        java.util.Date util_StartDate =format.parse(request.getParameter("start_date1"));
+	        java.util.Date util_StartDate =format.parse(request.getParameter("start_date"));
 	        
 	        java.sql.Date sql_StartDate = new java.sql.Date( util_StartDate.getTime() );
 	
-	        java.util.Date util_EndDate = format.parse(request.getParameter("end_date1"));
+	        java.util.Date util_EndDate = format.parse(request.getParameter("end_date"));
 	      
 	        java.sql.Date sql_EndDate = new java.sql.Date( util_EndDate.getTime() );
 	        
@@ -44,7 +44,7 @@ public class user_hoarding_permisson extends HttpServlet {
 	       
 	        PreparedStatement st = (PreparedStatement) con .prepareStatement(sql);  // Create a Query
 	        
-	      
+	        String username = (String)session.getAttribute("username");
 	      
 	        st.setInt(1, Integer.parseInt((String)session.getAttribute("event_id")));
 	        
@@ -57,13 +57,30 @@ public class user_hoarding_permisson extends HttpServlet {
 	        
 	        st.setDate(4, sql_EndDate);
 	      
-	        st.execute();
+	        st.executeUpdate();
 	      
 	        
 	        
 	        
-	       
-	        response.sendRedirect("my_events_detail.jsp");
+	        sql = "insert into misc_ledger values( ? , 2 , ? , ? , 1 , ? ) ";
+	        
+	        st = (PreparedStatement) con .prepareStatement(sql); 
+	        
+	        st.setInt(1, Integer.parseInt((String)session.getAttribute("event_id")));
+	        
+	        st.setDate(2, sql_StartDate);
+	        
+	        st.setString(3, Discripition);
+	        
+	        st.setDate(4, sql_EndDate);
+	      
+	        st.executeUpdate();
+	        
+	        st.close();
+	        
+	        con.close();
+	        
+	        response.sendRedirect("DashBoard.jsp");
 			
 		}
 	
