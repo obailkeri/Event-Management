@@ -73,9 +73,9 @@
         <a href="index.html"><img src="img/logo.png" style="width:50px; height:40px;"></a>
 
         <!-- For Side Bar Toggle -->
-        <!-- <a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left"></i></a> -->
+        <a href="#" class="sidebar-toggler text-gray-500 mr-4 mr-lg-5 lead"><i class="fas fa-align-left ml-2"></i></a>
 
-        <a href="#" class="navbar-brand font-weight-bold text-uppercase text-base "><font size="4.6">Welcome  ${username} </font>  </a>
+        <a href="#" class="navbar-brand font-weight-bold text-uppercase text-base mx-auto"><font size="4.6">Welcome  ${username} </font>  </a>
         <ul class="ml-auto d-flex align-items-center list-unstyled mb-0">
           <li class="nav-item dropdown mr-3"><a id="notifications" href="http://example.com" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle text-gray-400 px-1" onclick="pauseAudio()">
           <i class="fa fa-bell fa-2x "></i>
@@ -121,7 +121,7 @@
 		                  			
 		                  		
 		                  	%>
-		                  	 		<audio controls autoplay loop  id="myAudio" style="display:none">
+		                  	 		<audio controls autoplay   id="myAudio" style="display:none">
 						         		<source src = "ring.mp3" type = "audio/mp3" />
 						     		 </audio>
 		                  		 <span class="notification-icon" onload="playAudio()"></span></a>
@@ -561,7 +561,7 @@ var methods = [
 	for (var i = 0; i < methods.length; ++i) {
 	  (function(cMethod) {
 	    $body.append($("<button>", {
-	      text: cMethod
+	     
 	    }).on("click", function() {
 	      eval(cMethod); // don't blame me for using eval
 	    }));

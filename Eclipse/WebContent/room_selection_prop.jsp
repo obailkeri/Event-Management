@@ -354,8 +354,8 @@ input:disabled {
                         <label class="col-md-12 form-control-label text-center"><p class="pt-1" style="font-size: 20px;">Please Accept or Reject all Proposed Classrooms</p></label>
                       </div>
 				
-                      <div class="row justify-content-center pb-5">
-                        <div class="col-md-4">
+                      <div class="row d-flex justify-content-center pb-5">
+                        <div class="">
                           <section id="seats">
                           	
             <table>
@@ -454,8 +454,8 @@ input:disabled {
                         </div>
                       </div>
 
-                      <div class="row justify-content-center">
-                        <div class="col-lg-4 col-md-5 mx-auto">
+                      <div class="row d-flex justify-content-center">
+                        <div class="mx-auto">
                        <form action="Reject_Other" method="post">
                             <div class="form-group">
                               <div class="row">

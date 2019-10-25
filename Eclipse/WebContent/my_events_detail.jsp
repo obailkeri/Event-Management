@@ -378,7 +378,7 @@
                         
                            <div class="row py-3">
                         	<form action="room_selection.jsp">
-           						<button type="submit" class="btn-sm btn-success mx-3" >ClassRoom Selection</button>
+           						<button type="submit" class="btn-sm btn-success mx-3"  value="<%=value %>" name="btn">ClassRoom Selection</button>
            				    </form> 
            				   
            				        <button type="button" data-toggle="modal" data-target="#myModal1" class="btn-sm btn-info mx-3">Flex Permission</button>

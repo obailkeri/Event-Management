@@ -46,7 +46,7 @@ HttpServletResponse response)
             // JDBC
 	          SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 	          
-	          String sql = "insert into event_ledger (event_name,description,username,status_level,prev_status_level,start_date,end_date   )values( ? , ? , ? , 1 , 1 , ? ,? ) ";
+	          String sql = "insert into event_ledger (event_name,description,username,status_level,prev_status_level,start_date,end_date   )values( ? , ? , ? , 1 , 0 , ? ,? ) ";
             
 	    	  java.util.Date util_StartDate =format.parse(request.getParameter("start_date"));
 	          
